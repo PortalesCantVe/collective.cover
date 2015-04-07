@@ -1,5 +1,6 @@
 (function ($) {
     var ajaxSearchRequest = [];
+
     function contentSearchFilter(url) {
         var queryVal = $("#contentchooser-content-search-input").val();
         var page = 0;
@@ -52,6 +53,7 @@
 
     $(function() {
         // Live search content tree
+        var portal_url = portal_url || $('body').data('portalUrl');
         coveractions.liveSearch('#contentchooser-content-trees','.item-list li','#filter-count');
 
         $(document).on("click", ".item-list a.next", function(e){
@@ -184,13 +186,13 @@ var coveractions = {
       call_context = call_context + '/';
       }
     */
-    call_context : portal_url + '/',
     current_path : document.location.href,
 
     preInit : function() {
         // If compose exists in url
+        var call_context = (typeof portal_url === 'undefined' ? $('body').data('portalUrl') : portal_url) + '/';
         if (this.current_path.indexOf('/compose') > 0){
-            this.getFolderContents(this.call_context,'@@jsonbytype');
+            this.getFolderContents(call_context, '@@jsonbytype');
 
         }
 
@@ -267,6 +269,7 @@ var coveractions = {
     getFolderContents : function(path, method) {
         // Sends a low level Ajax request
         var t = this, d = document, w = window, na = navigator, ua = na.userAgent;
+        var call_context = (typeof portal_url === 'undefined' ? $('body').data('portalUrl') : portal_url) + '/';
         $('#contentchooser-content-trees').val('');
 
         coveractions.send({
@@ -298,7 +301,7 @@ var coveractions = {
                             html += '</a>';
                         } else {
                             if (data.items[i].portal_type == 'Image') {
-                                html += '<img src="' + coveractions.call_context + '/image.png" border="0"/> ';
+                                html += '<img src="' + call_context + '/image.png" border="0"/> ';
                             }
                             html += '<a data-ct-type="' +
                                 data.items[i].portal_type  +'" class="' +
@@ -377,7 +380,6 @@ var coveractions = {
 
 };
 
-coveractions.preInit();
 
 
 (function ($) {
@@ -395,5 +397,6 @@ coveractions.preInit();
 
     $(document).ready(function() {
         filterOnKeyUp();
+        coveractions.preInit();
     });
 }(jQuery));
