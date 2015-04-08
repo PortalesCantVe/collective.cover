@@ -7,7 +7,6 @@ from collective.cover.testing import PLONE_VERSION
 from plone import api
 
 import json
-import re
 import unittest
 
 
