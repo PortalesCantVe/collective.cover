@@ -92,7 +92,7 @@ class CoverIntegrationTestCase(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         layout_edit = self.cover.restrictedTraverse('layoutedit')
         settings = json.loads(layout_edit.layoutmanager_settings())
-        self.assertEqual(settings, {'ncolumns': 16})
+        self.assertEqual(settings, {'ncolumns': 12})
 
     def test_searchabletext_indexer(self):
         from collective.cover.content import searchableText
@@ -164,13 +164,13 @@ class CoverMultipleGridsIntegrationTestCase(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         layout_edit = self.cover.restrictedTraverse('layoutedit')
         settings = json.loads(layout_edit.layoutmanager_settings())
-        self.assertEqual(settings, {'ncolumns': 16})
+        self.assertEqual(settings, {'ncolumns': 12})
 
         # Choose different grid.
         registry = getUtility(IRegistry)
         cover_settings = registry.forInterface(ICoverSettings)
-        cover_settings.grid_system = 'bootstrap3'
+        cover_settings.grid_system = 'deco16_grid'
 
         # The number of columns should be different now.
         settings = json.loads(layout_edit.layoutmanager_settings())
-        self.assertEqual(settings, {'ncolumns': 12})
+        self.assertEqual(settings, {'ncolumns': 16})

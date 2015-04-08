@@ -112,8 +112,9 @@ class VocabulariesTestCase(unittest.TestCase):
 
         # Our default grid system must be in the vocabulary.
         grids = vocabulary(self.portal)
-        self.assertEqual(len(grids), 1)
+        self.assertEqual(len(grids), 2)
         self.assertIn(u'deco16_grid', grids)
+        self.assertIn(u'bootstrap3', grids)
 
 
 class VocabulariesMultipleGridsTestCase(unittest.TestCase):
