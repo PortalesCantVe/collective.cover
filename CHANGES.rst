@@ -6,9 +6,8 @@ There's a frood who really knows where his towel is.
 1.0a11 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
-- Fix issue `#331`_ where page composition layer had side-effects outside
-  cover pages
-  (upgrade to plone.app.blocks >= 2.0.0; remove support for Plone 4.2).
+- Fix an issue where page composition layer had side-effects outside cover pages by upgrading to plone.app.blocks 2.0 (fixes `#331`_);
+  this forces us to drop support for Plone 4.2 also.
   [datakurre]
 
 - Add custom classes for row and columns (closes `#504`_).
